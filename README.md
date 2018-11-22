@@ -21,16 +21,17 @@ It is simple.
 
 - in your `index.md` add
 
-```
-\---
- book: name-of-meta-data-file-without-extension
-\---
+<pre>
+&#8203---
+book: name-of-meta-data-file-without-extension
+&#8203---
 Your content Markdown and HTML
-```
+</pre>
 
 ### MetaFile
 
 See [_data/books/README.yml](_data/books/README.yml) for all options in Meta File
 
 ### Publishing A Book
-- just add the name of book's meta file _without extention_ to `_data/_books.yml`
+Publishing a book is simply adding them to Home page
+- just add the name of book's meta file _without extension_ to `_data/_books.yml`
