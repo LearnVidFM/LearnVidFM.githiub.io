@@ -24,6 +24,7 @@ It is simple.
 <pre>
 &#8203---
 book: name-of-meta-data-file-without-extension
+layout: default
 &#8203---
 Your content Markdown and HTML
 </pre>
