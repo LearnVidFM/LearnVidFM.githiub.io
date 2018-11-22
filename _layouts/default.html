@@ -1,0 +1,145 @@
+<!doctype html>
+{% assign book=site.data.books[page.book] %}
+
+{% if page.title %}
+{% assign title=page.title %}
+{% else %}
+{% capture title %}{{ page.name | split: '.' | first | split: '-' | join: ' ' | capitalize | strip }}{% endcapture %}
+{% endif %}
+
+{% assign is-index=false %}
+
+{% if title=='Index' %}
+{% assign title=book.name %}
+{% assign is-index=true %}
+{% endif %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    {% if page.syntax-highlighting %}
+    <link rel="stylesheet" href="/assets/css/default-pygments.css">
+    {% endif %}
+    <title>
+        {% if is-index==false %}{{title}} - {% endif %} {{book.name | capitalize}} | LearnVidFM
+    </title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            margin: 0;
+        }
+
+        header, main, footer {
+            padding-left: 300px;
+            font-family: 'Raleway', sans-serif;
+        }
+
+        @media only screen and (max-width: 992px) {
+            header, main, footer {
+                padding-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+
+    <ul id="slide-out" class="sidenav sidenav-fixed z-depth-0 grey lighten-5">
+        <li>
+            <img src="/assets/images/books/{{book.image}}" style="width: 300px; height: auto;" alt="{{book.name}} Icon">
+            <br>
+            <div style="font-size: 2rem;text-align: center">
+                <a href="/books/{{page.book}}/">{{book.name}}</a>
+            </div>
+        </li>
+        <li class="no-padding">
+            <ul class="collapsible collapsible-accordion">
+                {% for chapter in book.chapters %}
+                {% if chapter.topics %}
+                <li style="width: 100%;display: block">
+                    <a class="collapsible-header">{{chapter.name}}<i class="material-icons">book</i></a>
+                    <div class="collapsible-body">
+                        <ul>
+                            {% for topic in chapter.topics %}
+                            <li class="grey lighten-5">
+                                <a href="/books/{{page.book}}/{{chapter | name_path}}/{{topic | name_path}}/"
+                                   style="white-space: nowrap; text-overflow: ellipsis;overflow: hidden; ">
+                                    {{topic.name}}
+                                </a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </li>
+                {% else %}
+                <li>
+                    <a href="/books/{{page.book}}/{{chapter | name_path}}/" style="padding-left: 16px; padding-right: 16px">
+                        <i class="material-icons">insert_drive_file</i>{{chapter.name}}
+                    </a>
+                </li>
+                {% endif %}
+                {% endfor %}
+            </ul>
+        </li>
+    </ul>
+
+    <div class="container" style="padding-top: 10px; padding-bottom: 10px">
+        <div class="">
+            <a href="#" data-target="slide-out" class="sidenav-trigger hide-on-large-only"><i class="material-icons">menu</i></a>
+            <h1>
+                {{title}}
+            </h1>
+            <h6>
+                - by
+                <b>
+                    {% if book.author.first %}
+                    {{ book.author | join: ', '}}
+                    {% else %}
+                    {{ book.author }}
+                    {% endif %}
+                </b>
+            </h6>
+        </div>
+        <div class="right">
+            <a href="" style="display: flex; align-items: center;">
+                &nbsp;&nbsp;Edit this page&nbsp;&nbsp;<i class="material-icons">create</i>
+            </a>
+        </div>
+    </div>
+
+    <div class="divider"></div>
+
+</header>
+
+<main>
+    <div style="margin: 10px">&nbsp;</div>
+    <div class="container">
+        {% include md.html html=content anchorBody='<i class="material-icons">bookmark</i>' %}
+    </div>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        let collapsible = document.querySelectorAll('.collapsible');
+        let collapsibleInstance = M.Collapsible.init(collapsible);
+        console.log(collapsibleInstance);
+
+        let sidenav = document.querySelectorAll('.sidenav');
+        let sidenavInstance = M.Sidenav.init(sidenav);
+        console.log(sidenavInstance);
+    });
+</script>
+<link href="https://fonts.googleapis.com/css?family=Raleway:300,700" rel="stylesheet">
+</body>
+</html>

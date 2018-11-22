@@ -1,0 +1,21 @@
+# Books Meta
+
+# The file name of Meta file should be same as the folder inside `books` folder.
+# ? Shows optional
+# <DataType>
+
+- name: Name of Book # <String>
+- image: image-file.png # <?String>, place image in /images/books/
+- author: Name of author # <Array> or <String>
+- chapters: # This is Structure of your site. <Array>
+    - name: Name of Chapter 1 # <String>
+      path: path-of-the-dir # <?String>
+      topics: # <?Array>
+        name: Name of topic # <String>
+        path: path-of-file # <?String>
+- desc: # <String>
+
+# NOTE: if 'path' is not given 'name' will be translated to lowercase and spaces will be replaced by -
+# example: 'React Native Basic' will be converted to 'react-native-basic'
+# do not include extensions in path
+# path is relative do not write absolute path

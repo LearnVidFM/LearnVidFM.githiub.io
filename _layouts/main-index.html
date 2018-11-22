@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>LearnVidFM - Home</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+        }
+
+        header {
+            height: 50vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Raleway', sans-serif;
+        }
+
+        header > div {
+            text-align: center;
+        }
+
+        .icon {
+            height: 200px;
+            width: 200px;
+            border-radius: 100px;
+        }
+
+        .book-icon {
+            height: 100%;
+            width: 100%;
+        }
+
+        .card-title {
+            background-color: #44444499;
+            width: 100%;
+        }
+    </style>
+
+</head>
+<body>
+
+<header class="blue-grey lighten-4 white-text z-depth-3">
+    <div>
+        <img src="/assets/images/LearnVidFM-Icon/icon.png" alt="LearnVidFM Icon" class="icon z-depth-5">
+        <h1 class="grey-text text-darken-4">
+            Learn<b>VidFM</b>
+        </h1>
+    </div>
+</header>
+
+<main class="container">
+    <h2>
+        Books
+    </h2>
+
+    <div class="row">
+        {% for book-name in site.data._books %}
+        {% assign book=site.data.books[book-name] %}
+        <div class="col s12 m6 l4">
+            <a href="/books/{{book-name}}/" class="black-text">
+
+                <div class="card">
+                    <div class="card-image">
+                        {% if book.image %}
+                        <img src="/assets/images/books/{{book.image}}" class="book-icon" alt="">
+                        {% else %}
+                        <img src="/assets/images/LearnVidFM-Icon/icon.png" class="book-icon" alt="">
+                        {% endif %}
+                        <h2 class="card-title">{{book.name}}</h2>
+                    </div>
+                    <div class="card-content">
+                        <p>
+                            {{book.desc}}
+                            {{book.name}}
+                            <br>
+                            {% if book.author %}
+                            <a href="{{book.author-profile}}">
+                                by {{book.author}}
+                            </a>
+                            {% endif %}
+                    </div>
+                </div>
+
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+
+</main>
+
+<footer class="page-footer blue-grey lighten-4">
+    <div class="container">
+        <div class="row">
+            <div class="col l6 s12">
+                <h5 class="black-text">learnVidFM</h5>
+                <p class="black-text text-lighten-4">LearnVidFM is an open source initiative by <a
+                        href="https://faisal-manzer.in" class="grey-text text-darken-3">Faisal Manzer</a></p>
+
+                <p class="black-text text-lighten-4"><a
+                        href="https://faisal-manzer.in" class="grey-text text-darken-3">Contribute on GitHub</a></p>
+            </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container black-text">
+            MIT Licenced
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Raleway:300,700" rel="stylesheet">
+</body>
+</html>
